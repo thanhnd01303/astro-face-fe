@@ -32,14 +32,20 @@ export default function App() {
       case "home":
         return <HomeScreen onNavigate={handleNavigate} />;
       case "daily-insight":
-      case "life-map":
-      case "compatibility":
         return (
           <PhotoUpload
             analysisType={analysisType}
             onNext={() => handleNavigate("loading")}
             onBack={() => handleNavigate("home")}
           />
+        );
+      case "life-map":
+        return (
+          <LifeMapScreen onBack={() => handleNavigate("home")} />
+        );
+      case "compatibility":
+        return (
+          <CompatibilityScreen onBack={() => handleNavigate("home")} />
         );
       case "life-map-history":
         return (
