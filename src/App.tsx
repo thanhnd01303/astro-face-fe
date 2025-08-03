@@ -21,10 +21,15 @@ type AppState =
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<AppState>("home");
   const [analysisType, setAnalysisType] = useState<string>("");
+  const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
 
   const handleNavigate = (screen: AppState, type?: string) => {
     setCurrentScreen(screen);
     if (type) setAnalysisType(type);
+  };
+
+  const handlePhotoUpload = (photoUrl: string) => {
+    setUploadedPhoto(photoUrl);
   };
 
   const renderScreen = () => {
@@ -34,8 +39,8 @@ export default function App() {
       case "daily-insight":
         return (
           <PhotoUpload
-            analysisType={analysisType}
-            onNext={() => handleNavigate("loading")}
+            onUpload={handlePhotoUpload}
+            onExplore={() => handleNavigate("loading")}
             onBack={() => handleNavigate("home")}
           />
         );
