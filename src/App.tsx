@@ -8,7 +8,7 @@ import { LifeMapHistoryScreen } from "./components/LifeMapHistoryScreen";
 import { CompatibilityScreen } from "./components/CompatibilityScreen";
 import { StarField } from "./components/StarField";
 
-type AppState
+type AppState =
   | "home"
   | "daily-insight"
   | "life-map"
