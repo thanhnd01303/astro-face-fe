@@ -143,14 +143,14 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
           </div>
 
           {/* Central Avatar with Orbiting Features - Moved to top */}
-          <div className="relative mb-8 flex justify-center">
+          <div className="relative mb-16 flex justify-center">
             {/* Constellation background */}
             <div className="relative">
-              <div className="w-72 h-72 rounded-full border border-white/10 opacity-30 absolute inset-0"></div>
-              <div className="w-56 h-56 rounded-full border border-white/5 opacity-20 absolute inset-8"></div>
+              <div className="w-80 h-80 rounded-full border border-white/10 opacity-30 absolute -inset-4"></div>
+              <div className="w-64 h-64 rounded-full border border-white/5 opacity-20 absolute inset-4"></div>
               
               {/* Central avatar */}
-              <div className="w-24 h-24 rounded-full overflow-hidden border-3 border-gradient-to-r from-purple-400 to-cyan-400 relative z-20 mx-auto mt-24 shadow-2xl">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-3 border-gradient-to-r from-purple-400 to-cyan-400 relative z-30 mx-auto mt-32 shadow-xl">
                 <img
                   src={photoUrl}
                   alt="Your cosmic self"
@@ -161,29 +161,28 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
               </div>
 
               {/* Orbiting asteroids */}
-              <div className="absolute inset-0 w-72 h-72 top-0 left-0">
+              <div className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2">
                 {facialFeatures.map((feature, index) => (
                   <div
                     key={feature.id}
-                    className="absolute top-1/2 left-1/2 w-0 h-0"
+                    className="absolute top-1/2 left-1/2 w-0 h-0 z-20"
                     style={{
-                      animation: `ellipticalOrbit 30s linear infinite`,
+                      animation: `orbitRotation 30s linear infinite`,
                       animationDelay: `${-(feature.startingAngle / 360) * 30}s`,
                       transform: 'translate(-50%, -50%)',
-                      transformOrigin: '0 0'
                     }}
                   >
                     <div
                       className="absolute"
                       style={{
-                        left: '120px',
-                        top: '-28px',
+                        left: '140px',
+                        top: '-24px',
                       }}
                     >
                       <button
                         onClick={() => handleFeatureClick(feature.id)}
                         className={`
-                          w-14 h-14 rounded-full flex items-center justify-center text-lg
+                          w-12 h-12 rounded-full flex items-center justify-center text-sm
                           border-2 cursor-pointer transition-all duration-300 relative
                           ${activeFeature === feature.id
                             ? 'border-cyan-400 bg-cyan-400/30 scale-125 shadow-lg shadow-cyan-400/50'
@@ -206,7 +205,7 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
               </div>
 
               {/* Constellation lines */}
-              <svg className="absolute inset-0 w-72 h-72 pointer-events-none opacity-20">
+              <svg className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20 z-10">
                 <defs>
                   <radialGradient id="constellationGradient">
                     <stop offset="0%" stopColor="#9370DB" stopOpacity="0.6"/>
@@ -217,9 +216,9 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
                   const nextIndex = (index + 1) % facialFeatures.length;
                   const angle1 = (feature.startingAngle * Math.PI) / 180;
                   const angle2 = (facialFeatures[nextIndex].startingAngle * Math.PI) / 180;
-                  const radius = 120;
-                  const centerX = 144;
-                  const centerY = 144;
+                  const radius = 140;
+                  const centerX = 160;
+                  const centerY = 160;
                   
                   const x1 = centerX + radius * Math.cos(angle1);
                   const y1 = centerY + radius * Math.sin(angle1);
@@ -245,7 +244,7 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
 
           {/* Bottom Section - Feature Information Display */}
           {activeFeatureData && (
-            <div className="glassmorphism rounded-2xl p-6 mx-4 border border-white/20 relative overflow-hidden">
+            <div className="glassmorphism rounded-2xl p-6 mx-4 border border-white/20 relative overflow-hidden mt-8">
               {/* Background gradient based on active feature */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-2xl"></div>
               
