@@ -90,15 +90,15 @@ export function PhotoUpload({ onUpload, onExplore, onBack, uploadedPhoto }: Phot
         {uploadedPhoto && (
           <div className="text-center">
             <p className="text-[#D3D3D3] text-xs">✨ Photo ready for analysis</p>
-              </div>
-            </div>
+          </div>
+        )}
+      </div>
 
         {/* Constellation decoration */}
         <div className="absolute top-32 left-8 w-2 h-2 bg-white rounded-full twinkle opacity-60" style={{ animationDelay: '0.5s' }} />
         <div className="absolute top-48 right-12 w-1.5 h-1.5 bg-white rounded-full twinkle opacity-40" style={{ animationDelay: '1.2s' }} />
         <div className="absolute bottom-40 left-16 w-1 h-1 bg-white rounded-full twinkle opacity-50" style={{ animationDelay: '2s' }} />
         <div className="absolute bottom-32 right-8 w-2 h-2 bg-white rounded-full twinkle opacity-30" style={{ animationDelay: '0.8s' }} />
-      </div>
     </div>
   );
 }
