@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { HomeScreen } from "./components/HomeScreen.tsx";
-import { PhotoUpload } from "./components/PhotoUpload.tsx";
-import { LoadingScreen } from "./components/LoadingScreen.tsx";
-import { ResultsScreen } from "./components/ResultsScreen.tsx";
-import { LifeMapScreen } from "./components/LifeMapScreen.tsx";
-import { LifeMapHistoryScreen } from "./components/LifeMapHistoryScreen.tsx";
-import { CompatibilityScreen } from "./components/CompatibilityScreen.tsx";
-import { StarField } from "./components/StarField.tsx";
+import { HomeScreen } from "./components/HomeScreen";
+import { PhotoUpload } from "./components/PhotoUpload";
+import { LoadingScreen } from "./components/LoadingScreen";
+import { ResultsScreen } from "./components/ResultsScreen";
+import { LifeMapScreen } from "./components/LifeMapScreen";
+import { LifeMapHistoryScreen } from "./components/LifeMapHistoryScreen";
+import { CompatibilityScreen } from "./components/CompatibilityScreen";
+import { StarField } from "./components/StarField";
 
 type AppState =
   | "home"
