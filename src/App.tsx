@@ -8,7 +8,7 @@
  import { LifeMapHistoryScreen } from "./components/LifeMapHistoryScreen";
  import { CompatibilityScreen } from "./components/CompatibilityScreen";
  import { StarField } from "./components/StarField";
-+import "./styles/globals.css";
+import "../styles/globals.css";
  
  type AppState
    | "home"
