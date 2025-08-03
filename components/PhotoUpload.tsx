@@ -16,13 +16,13 @@ export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-16">
-      <div className="flex flex-col items-center space-y-8 w-full max-w-sm">
+    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-safe-top">
+      <div className="flex flex-col items-center space-y-6 w-full max-w-sm">
         {/* Back Button */}
-        <div className="flex items-center w-full mb-4">
+        <div className="flex items-center w-full mb-2">
           <button
             onClick={onBack}
-            className="text-[#D3D3D3] hover:text-white transition-colors duration-200"
+            className="text-[#D3D3D3] hover:text-white transition-colors duration-200 p-2 -ml-2"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
@@ -39,11 +39,11 @@ export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
         <div className="relative">
           <label 
             htmlFor="photo-upload" 
-            className="block w-[150px] h-[150px] rounded-full cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 mystical-border hover:glow"
+            className="block w-32 h-32 rounded-full cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 mystical-border hover:glow"
           >
             <div className="w-full h-full rounded-full bg-[#1A1A2E] border-2 border-transparent flex items-center justify-center">
               <div className="text-center space-y-2">
-                <Plus className="w-8 h-8 text-[#D3D3D3] mx-auto" />
+                <Plus className="w-6 h-6 text-[#D3D3D3] mx-auto" />
                 <p className="text-[#D3D3D3] text-xs leading-tight">Tap to upload<br />photo</p>
               </div>
             </div>
@@ -60,7 +60,7 @@ export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
         {/* Explore Button */}
         <button
           onClick={onExplore}
-          className="w-[200px] h-[50px] rounded-lg mystical-gradient text-white font-medium text-base transition-all duration-300 hover:brightness-110 active:scale-95 shadow-lg"
+          className="w-48 h-12 rounded-lg mystical-gradient text-white font-medium text-sm transition-all duration-300 hover:brightness-110 active:scale-95 shadow-lg"
         >
           Explore
         </button>

@@ -25,23 +25,23 @@ export function ResultsScreen({ photoUrl, onBack }: ResultsScreenProps) {
   const avoidInsight = "Be cautious about making impulsive decisions regarding finances or relationships. Your analytical nature might be overshadowed by emotional reactions, so take time to reflect before acting on major choices.";
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-12 overflow-y-auto">
-      <div className="flex flex-col items-center space-y-6 w-full max-w-sm pb-8">
+    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-safe-top overflow-y-auto">
+      <div className="flex flex-col items-center space-y-4 w-full max-w-sm pb-safe-bottom">
         {/* Header */}
         <div className="flex items-center w-full">
           <button
             onClick={onBack}
-            className="text-[#D3D3D3] hover:text-white transition-colors duration-200"
+            className="text-[#D3D3D3] hover:text-white transition-colors duration-200 p-2 -ml-2"
           >
             <ArrowLeft className="w-6 h-6" />
           </button>
-          <h1 className="text-white text-xl font-medium text-center flex-1">Your Daily Insight</h1>
+          <h1 className="text-white text-lg font-medium text-center flex-1">Your Daily Insight</h1>
           <div className="w-6"></div>
         </div>
 
         {/* Central Photo */}
         <div className={`relative ${showContent ? 'zoom-in' : 'opacity-0'}`}>
-          <div className="w-[100px] h-[100px] rounded-full overflow-hidden border-2 border-transparent mystical-border glow">
+          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-transparent mystical-border glow">
             <img
               src={photoUrl}
               alt="Uploaded face"
@@ -50,8 +50,8 @@ export function ResultsScreen({ photoUrl, onBack }: ResultsScreenProps) {
           </div>
           
           {/* Orbital decoration */}
-          <div className="absolute -inset-8 border border-white/10 rounded-full"></div>
-          <div className="absolute -inset-12 border border-white/5 rounded-full"></div>
+          <div className="absolute -inset-6 border border-white/10 rounded-full"></div>
+          <div className="absolute -inset-8 border border-white/5 rounded-full"></div>
         </div>
 
         {/* Mood & Energy Scores */}

@@ -38,10 +38,10 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-16">
-      <div className="flex flex-col items-center space-y-8 w-full max-w-sm">
+    <div className="flex flex-col items-center justify-start min-h-screen p-4 pt-safe-top">
+      <div className="flex flex-col items-center space-y-6 w-full max-w-sm">
         {/* Header */}
-        <div className="text-center space-y-3 fade-in">
+        <div className="text-center space-y-3 fade-in pt-4">
           <h1 className="text-white text-3xl font-medium tracking-wide">Face Astro</h1>
           <p className="text-[#D3D3D3] text-sm">Unlock the mysteries of your face</p>
           
@@ -53,7 +53,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
         </div>
 
         {/* Feature Cards */}
-        <div className="grid grid-cols-2 gap-4 w-full">
+        <div className="grid grid-cols-2 gap-3 w-full px-2">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
@@ -63,16 +63,16 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
                 className={`
                   relative p-4 rounded-xl bg-gradient-to-br ${feature.gradient} 
                   shadow-lg transition-all duration-300 hover:scale-105 active:scale-95
-                  min-h-[120px] flex flex-col items-center justify-center space-y-2
+                  min-h-[110px] flex flex-col items-center justify-center space-y-2
                   slide-up
                 `}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <IconComponent className="w-8 h-8 text-white mb-2" />
-                <h3 className="text-white font-medium text-sm text-center leading-tight">
+                <IconComponent className="w-6 h-6 text-white mb-1" />
+                <h3 className="text-white font-medium text-xs text-center leading-tight">
                   {feature.title}
                 </h3>
-                <p className="text-white/80 text-xs text-center leading-tight">
+                <p className="text-white/80 text-[10px] text-center leading-tight">
                   {feature.description}
                 </p>
                 

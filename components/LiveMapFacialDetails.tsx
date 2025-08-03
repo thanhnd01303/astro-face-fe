@@ -134,23 +134,23 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
       </div>
 
       {/* Main Content */}
-      <div className="h-full overflow-y-auto pb-20">
+      <div className="h-full overflow-y-auto pb-safe-bottom">
         <div className="px-4">
           {/* Top Section - Orbital System */}
-          <div className="text-center mb-6 mt-4">
-            <h2 className="text-white text-xl font-medium mb-2">Your Cosmic Features</h2>
+          <div className="text-center mb-4 mt-2">
+            <h2 className="text-white text-lg font-medium mb-2">Your Cosmic Features</h2>
             <p className="text-white/70 text-sm">Tap the orbiting features to discover their meanings</p>
           </div>
 
           {/* Central Avatar with Orbiting Features - Moved to top */}
-          <div className="relative mb-16 flex justify-center">
+          <div className="relative mb-8 flex justify-center" style={{ height: '280px' }}>
             {/* Constellation background */}
             <div className="relative">
-              <div className="w-80 h-80 rounded-full border border-white/10 opacity-30 absolute -inset-4"></div>
-              <div className="w-64 h-64 rounded-full border border-white/5 opacity-20 absolute inset-4"></div>
+              <div className="w-64 h-64 rounded-full border border-white/10 opacity-30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="w-48 h-48 rounded-full border border-white/5 opacity-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
               
               {/* Central avatar */}
-              <div className="w-24 h-24 rounded-full overflow-hidden border-3 border-gradient-to-r from-purple-400 to-cyan-400 relative z-30 mx-auto mt-32 shadow-xl">
+              <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-purple-400 relative z-30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-xl">
                 <img
                   src={photoUrl}
                   alt="Your cosmic self"
@@ -161,28 +161,22 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
               </div>
 
               {/* Orbiting asteroids */}
-              <div className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute top-1/2 left-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2">
                 {facialFeatures.map((feature, index) => (
                   <div
                     key={feature.id}
-                    className="absolute top-1/2 left-1/2 w-0 h-0 z-20"
+                    className="absolute w-full h-full"
                     style={{
-                      animation: `orbitRotation 30s linear infinite`,
-                      animationDelay: `${-(feature.startingAngle / 360) * 30}s`,
-                      transform: 'translate(-50%, -50%)',
+                      transform: `rotate(${feature.startingAngle}deg)`,
                     }}
                   >
                     <div
-                      className="absolute"
-                      style={{
-                        left: '140px',
-                        top: '-24px',
-                      }}
+                      className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     >
                       <button
                         onClick={() => handleFeatureClick(feature.id)}
                         className={`
-                          w-12 h-12 rounded-full flex items-center justify-center text-sm
+                          w-10 h-10 rounded-full flex items-center justify-center text-xs
                           border-2 cursor-pointer transition-all duration-300 relative
                           ${activeFeature === feature.id
                             ? 'border-cyan-400 bg-cyan-400/30 scale-125 shadow-lg shadow-cyan-400/50'
@@ -191,7 +185,7 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
                         `}
                         style={{
                           animation: `asteroidFloat ${4 + index * 0.5}s ease-in-out infinite`,
-                          animationDelay: `${index * 0.2}s`,
+                          animationDelay: `${index * 0.2}s`
                         }}
                       >
                         <span className="relative z-10">{feature.icon}</span>
@@ -205,7 +199,7 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
               </div>
 
               {/* Constellation lines */}
-              <svg className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20 z-10">
+              <svg className="absolute top-1/2 left-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20 z-10">
                 <defs>
                   <radialGradient id="constellationGradient">
                     <stop offset="0%" stopColor="#9370DB" stopOpacity="0.6"/>
@@ -216,9 +210,9 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
                   const nextIndex = (index + 1) % facialFeatures.length;
                   const angle1 = (feature.startingAngle * Math.PI) / 180;
                   const angle2 = (facialFeatures[nextIndex].startingAngle * Math.PI) / 180;
-                  const radius = 140;
-                  const centerX = 160;
-                  const centerY = 160;
+                  const radius = 120;
+                  const centerX = 128;
+                  const centerY = 128;
                   
                   const x1 = centerX + radius * Math.cos(angle1);
                   const y1 = centerY + radius * Math.sin(angle1);
@@ -244,30 +238,30 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
 
           {/* Bottom Section - Feature Information Display */}
           {activeFeatureData && (
-            <div className="glassmorphism rounded-2xl p-6 mx-4 border border-white/20 relative overflow-hidden mt-8">
+            <div className="glassmorphism rounded-xl p-4 border border-white/20 relative overflow-hidden">
               {/* Background gradient based on active feature */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-2xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-xl"></div>
               
               <div className="relative z-10">
                 {/* Feature Header */}
-                <div className="text-center mb-6">
-                  <div className="text-4xl mb-3">{activeFeatureData.icon}</div>
-                  <h3 className="text-white text-xl font-medium">{activeFeatureData.title}</h3>
+                <div className="text-center mb-4">
+                  <div className="text-3xl mb-2">{activeFeatureData.icon}</div>
+                  <h3 className="text-white text-lg font-medium">{activeFeatureData.title}</h3>
                 </div>
 
                 {/* Feature Details */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {/* Strengths Section */}
                   <div>
-                    <h4 className="text-green-400 font-medium mb-3 flex items-center text-lg">
+                    <h4 className="text-green-400 font-medium mb-2 flex items-center text-base">
                       <Sparkles className="w-5 h-5 mr-2" />
                       Cosmic Strengths
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {activeFeatureData.strengths.map((strength, index) => (
-                        <div key={index} className="flex items-start bg-white/5 rounded-lg p-3">
+                        <div key={index} className="flex items-start bg-white/5 rounded-lg p-2">
                           <span className="text-green-400 mr-3 mt-0.5 w-2 h-2 rounded-full bg-green-400 flex-shrink-0"></span>
-                          <p className="text-white/90 text-sm leading-relaxed">{strength}</p>
+                          <p className="text-white/90 text-xs leading-relaxed">{strength}</p>
                         </div>
                       ))}
                     </div>
@@ -275,15 +269,15 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
 
                   {/* Growth Areas Section */}
                   <div>
-                    <h4 className="text-cyan-400 font-medium mb-3 flex items-center text-lg">
+                    <h4 className="text-cyan-400 font-medium mb-2 flex items-center text-base">
                       <Sparkles className="w-5 h-5 mr-2" />
                       Growth Opportunities
                     </h4>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {activeFeatureData.growth.map((growth, index) => (
-                        <div key={index} className="flex items-start bg-white/5 rounded-lg p-3">
+                        <div key={index} className="flex items-start bg-white/5 rounded-lg p-2">
                           <span className="text-cyan-400 mr-3 mt-0.5 w-2 h-2 rounded-full bg-cyan-400 flex-shrink-0"></span>
-                          <p className="text-white/90 text-sm leading-relaxed">{growth}</p>
+                          <p className="text-white/90 text-xs leading-relaxed">{growth}</p>
                         </div>
                       ))}
                     </div>
@@ -291,7 +285,7 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
                 </div>
 
                 {/* Feature Navigation Hint */}
-                <div className="mt-6 text-center">
+                <div className="mt-4 text-center">
                   <p className="text-white/50 text-xs">
                     Tap other orbiting features above to explore more insights
                   </p>
@@ -303,10 +297,10 @@ export function LiveMapFacialDetails({ photoUrl, personalityScores, onBack, onVi
       </div>
 
       {/* Fixed Bottom Action */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1A1A2E] to-transparent p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[#1A1A2E] to-transparent p-4 pb-safe-bottom">
         <button
           onClick={onViewTimeline}
-          className="w-full h-12 bg-gradient-to-r from-purple-600 to-cyan-500 text-white rounded-xl font-medium flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-105"
+          className="w-full max-w-sm mx-auto h-12 bg-gradient-to-r from-purple-600 to-cyan-500 text-white rounded-xl font-medium flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-105"
         >
           <Map className="w-5 h-5" />
           <span>Explore Your Life Journey</span>

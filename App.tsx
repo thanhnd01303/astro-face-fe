@@ -71,10 +71,10 @@ export default function App() {
   };
 
   return (
-    <div className="w-full h-screen bg-[#1A1A2E] relative overflow-hidden">
+    <div className="w-full min-h-screen bg-[#1A1A2E] relative overflow-hidden">
       <StarField />
 
-      <div className="relative z-10 w-full h-full max-w-[375px] mx-auto">
+      <div className="relative z-10 w-full min-h-screen max-w-sm mx-auto px-safe">
         {currentState === "home" && (
           <HomeScreen onNavigate={handleNavigation} />
         )}

@@ -139,15 +139,15 @@ export function CompatibilityScreen({ onBack }: CompatibilityScreenProps) {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col items-center justify-center h-full px-6 relative z-10">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 relative z-10">
         {/* Logo/Icon Area */}
         <div className="relative mb-8">
-          <div className="w-32 h-32 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20">
+          <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/20">
             {/* Two overlapping face silhouettes forming heart shape */}
             <div className="relative">
-              <div className="absolute left-0 w-12 h-12 bg-white/30 rounded-full"></div>
-              <div className="absolute right-0 w-12 h-12 bg-white/30 rounded-full"></div>
-              <div className="w-16 h-8 bg-gradient-to-b from-transparent to-white/20 rounded-b-full mt-6"></div>
+              <div className="absolute left-0 w-8 h-8 bg-white/30 rounded-full"></div>
+              <div className="absolute right-0 w-8 h-8 bg-white/30 rounded-full"></div>
+              <div className="w-12 h-6 bg-gradient-to-b from-transparent to-white/20 rounded-b-full mt-4"></div>
             </div>
           </div>
           
@@ -157,8 +157,8 @@ export function CompatibilityScreen({ onBack }: CompatibilityScreenProps) {
 
         {/* Title and Tagline */}
         <div className="text-center mb-12">
-          <h2 className="text-white text-3xl font-medium mb-3">Face Harmony</h2>
-          <p className="text-white/80 text-lg mb-2">Discover Your Perfect Match!</p>
+          <h2 className="text-white text-2xl font-medium mb-3">Face Harmony</h2>
+          <p className="text-white/80 text-base mb-2">Discover Your Perfect Match!</p>
           <p className="text-white/60 text-sm leading-relaxed max-w-xs">
             Upload two photos and unlock the secrets of compatibility through AI-powered face reading
           </p>
@@ -167,36 +167,36 @@ export function CompatibilityScreen({ onBack }: CompatibilityScreenProps) {
         {/* Main CTA Button */}
         <button
           onClick={handleStartTest}
-          className="w-64 h-16 bg-white/90 text-[#4B0082] rounded-2xl font-medium text-lg shadow-2xl transition-all duration-300 hover:bg-white hover:scale-105 hover:shadow-3xl relative overflow-hidden group"
+          className="w-72 h-14 bg-white/90 text-[#4B0082] rounded-xl font-medium text-base shadow-2xl transition-all duration-300 hover:bg-white hover:scale-105 hover:shadow-3xl relative overflow-hidden group max-w-[calc(100vw-2rem)]"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-[#4B0082]/10 to-[#00CED1]/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
           <span className="relative z-10">Start Compatibility Test</span>
         </button>
 
         {/* Feature Highlights */}
-        <div className="flex justify-center space-x-8 mt-12 text-white/70 text-sm">
+        <div className="flex justify-center space-x-6 mt-8 text-white/70 text-xs">
           <div className="text-center">
-            <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-white/10 flex items-center justify-center">
-              <span className="text-xs">🤝</span>
+            <div className="w-6 h-6 mx-auto mb-1 rounded-full bg-white/10 flex items-center justify-center">
+              <span className="text-[10px]">🤝</span>
             </div>
             <p>Work Match</p>
           </div>
           <div className="text-center">
-            <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-white/10 flex items-center justify-center">
-              <span className="text-xs">💖</span>
+            <div className="w-6 h-6 mx-auto mb-1 rounded-full bg-white/10 flex items-center justify-center">
+              <span className="text-[10px]">💖</span>
             </div>
             <p>Love Match</p>
           </div>
           <div className="text-center">
-            <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-white/10 flex items-center justify-center">
-              <span className="text-xs">🎬</span>
+            <div className="w-6 h-6 mx-auto mb-1 rounded-full bg-white/10 flex items-center justify-center">
+              <span className="text-[10px]">🎬</span>
             </div>
             <p>Share Video</p>
           </div>
         </div>
 
         {/* Challenge Hashtag */}
-        <div className="absolute bottom-8 left-0 right-0 text-center">
+        <div className="absolute bottom-safe-bottom left-0 right-0 text-center">
           <p className="text-white/50 text-sm">#FaceHarmonyChallenge</p>
         </div>
       </div>
