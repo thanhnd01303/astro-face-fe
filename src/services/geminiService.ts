@@ -50,12 +50,20 @@ export class GeminiService {
 
   static async analyzeDailyInsight(imageFile: File): Promise<DailyInsightResponse> {
     try {
+      console.log('Starting Gemini API analysis...');
+      
       // Read the prompt file
       const promptResponse = await fetch('/daily_insight_prompt.txt');
+      if (!promptResponse.ok) {
+        throw new Error('Failed to load prompt file');
+      }
       const prompt = await promptResponse.text();
+      console.log('Prompt loaded successfully');
 
       // Convert image to base64
+      console.log('Converting image to base64...');
       const base64Image = await this.fileToBase64(imageFile);
+      console.log('Image converted to base64, size:', base64Image.length);
       
       const requestBody = {
         contents: [
@@ -81,6 +89,7 @@ export class GeminiService {
         }
       };
 
+      console.log('Calling Gemini API...');
       const response = await fetch(`${this.API_URL}?key=${this.API_KEY}`, {
         method: 'POST',
         headers: {
@@ -89,17 +98,20 @@ export class GeminiService {
         body: JSON.stringify(requestBody)
       });
 
+      console.log('API Response status:', response.status);
       if (!response.ok) {
         throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
+      console.log('API Response data:', data);
       
       if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
         throw new Error('Invalid response from Gemini API');
       }
 
       const textResponse = data.candidates[0].content.parts[0].text;
+      console.log('Text response:', textResponse);
       
       // Parse JSON response
       try {
@@ -109,6 +121,7 @@ export class GeminiService {
         }
         
         const parsedResponse: DailyInsightResponse = JSON.parse(jsonMatch[0]);
+        console.log('Parsed response:', parsedResponse);
         return parsedResponse;
       } catch (parseError) {
         console.error('Failed to parse JSON response:', textResponse);
@@ -119,6 +132,7 @@ export class GeminiService {
       console.error('Error calling Gemini API:', error);
       
       // Return mock data as fallback
+      console.log('Using mock data as fallback');
       return this.getMockDailyInsight();
     }
   }

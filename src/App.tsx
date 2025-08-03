@@ -21,15 +21,24 @@ type AppState =
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<AppState>("home");
   const [analysisType, setAnalysisType] = useState<string>("");
-  const [uploadedPhoto, setUploadedPhoto] = useState<string>("");
+  const [uploadedPhoto, setUploadedPhoto] = useState<string | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [dailyInsightData, setDailyInsightData] = useState<any>(null);
 
   const handleNavigate = (screen: AppState, type?: string) => {
     setCurrentScreen(screen);
     if (type) setAnalysisType(type);
   };
 
-  const handlePhotoUpload = (photoUrl: string) => {
+  const handlePhotoUpload = (file: File) => {
+    const photoUrl = URL.createObjectURL(file);
     setUploadedPhoto(photoUrl);
+    setUploadedFile(file);
+  };
+
+  const handleAnalysisComplete = (data: any) => {
+    setDailyInsightData(data);
+    handleNavigate("results");
   };
 
   const renderScreen = () => {
@@ -40,8 +49,9 @@ export default function App() {
         return (
           <PhotoUpload
             onUpload={handlePhotoUpload}
-            onExplore={() => handleNavigate("loading")}
+            onExplore={() => uploadedFile ? handleNavigate("loading") : null}
             onBack={() => handleNavigate("home")}
+            uploadedPhoto={uploadedPhoto}
           />
         );
       case "life-map":
@@ -58,24 +68,13 @@ export default function App() {
         );
       case "loading":
         return (
-          <LoadingScreen
-            analysisType={analysisType}
-            onComplete={() => handleNavigate("results")}
-          />
+          <LoadingScreen onAnalysisComplete={handleAnalysisComplete} uploadedFile={uploadedFile} />
         );
       case "results":
-        if (analysisType === "life-map") {
-          return (
-            <LifeMapScreen onBack={() => handleNavigate("home")} />
-          );
-        } else if (analysisType === "compatibility") {
-          return (
-            <CompatibilityScreen onBack={() => handleNavigate("home")} />
-          );
-        }
         return (
           <ResultsScreen
-            analysisType={analysisType}
+            photoUrl={uploadedPhoto!}
+            dailyInsightData={dailyInsightData}
             onBack={() => handleNavigate("home")}
           />
         );

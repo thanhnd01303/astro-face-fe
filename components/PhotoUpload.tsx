@@ -1,13 +1,14 @@
 import React from 'react';
-import { Plus, ArrowLeft } from 'lucide-react';
+import { Plus, ArrowLeft, Camera } from 'lucide-react';
 
 interface PhotoUploadProps {
   onUpload: (file: File) => void;
   onExplore: () => void;
   onBack: () => void;
+  uploadedPhoto?: string | null;
 }
 
-export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
+export function PhotoUpload({ onUpload, onExplore, onBack, uploadedPhoto }: PhotoUploadProps) {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -41,11 +42,25 @@ export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
             htmlFor="photo-upload" 
             className="block w-32 h-32 rounded-full cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 mystical-border hover:glow"
           >
-            <div className="w-full h-full rounded-full bg-[#1A1A2E] border-2 border-transparent flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <Plus className="w-6 h-6 text-[#D3D3D3] mx-auto" />
-                <p className="text-[#D3D3D3] text-xs leading-tight">Tap to upload<br />photo</p>
-              </div>
+            <div className="w-full h-full rounded-full bg-[#1A1A2E] border-2 border-transparent flex items-center justify-center overflow-hidden">
+              {uploadedPhoto ? (
+                <>
+                  <img
+                    src={uploadedPhoto}
+                    alt="Uploaded photo"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Upload overlay */}
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <Camera className="w-6 h-6 text-white" />
+                  </div>
+                </>
+              ) : (
+                <div className="text-center space-y-2">
+                  <Plus className="w-6 h-6 text-[#D3D3D3] mx-auto" />
+                  <p className="text-[#D3D3D3] text-xs leading-tight">Tap to upload<br />photo</p>
+                </div>
+              )}
             </div>
           </label>
           <input
@@ -60,10 +75,23 @@ export function PhotoUpload({ onUpload, onExplore, onBack }: PhotoUploadProps) {
         {/* Explore Button */}
         <button
           onClick={onExplore}
-          className="w-48 h-12 rounded-lg mystical-gradient text-white font-medium text-sm transition-all duration-300 hover:brightness-110 active:scale-95 shadow-lg"
+          disabled={!uploadedPhoto}
+          className={`
+            w-48 h-12 rounded-lg font-medium text-sm transition-all duration-300 shadow-lg
+            ${uploadedPhoto 
+              ? 'mystical-gradient text-white hover:brightness-110 active:scale-95' 
+              : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            }
+          `}
         >
-          Explore
+          {uploadedPhoto ? 'Explore Your Face' : 'Upload Photo First'}
         </button>
+
+        {uploadedPhoto && (
+          <div className="text-center">
+            <p className="text-[#D3D3D3] text-xs">✨ Photo ready for analysis</p>
+              </div>
+            </div>
 
         {/* Constellation decoration */}
         <div className="absolute top-32 left-8 w-2 h-2 bg-white rounded-full twinkle opacity-60" style={{ animationDelay: '0.5s' }} />

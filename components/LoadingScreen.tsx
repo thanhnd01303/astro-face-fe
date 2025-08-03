@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { GeminiService } from '../src/services/geminiService';
 
-export function LoadingScreen() {
+interface LoadingScreenProps {
+  onAnalysisComplete: (data: any) => void;
+  uploadedFile: File | null;
+}
+
+export function LoadingScreen({ onAnalysisComplete, uploadedFile }: LoadingScreenProps) {
+  useEffect(() => {
+    const analyzePhoto = async () => {
+      if (!uploadedFile) {
+        console.error('No file to analyze');
+        return;
+      }
+
+      try {
+        console.log('Starting analysis with Gemini API...');
+        const result = await GeminiService.analyzeDailyInsight(uploadedFile);
+        console.log('Analysis result:', result);
+        
+        // Simulate minimum loading time for better UX
+        setTimeout(() => {
+          onAnalysisComplete(result);
+        }, 2000);
+      } catch (error) {
+        console.error('Analysis failed:', error);
+        // Use mock data as fallback
+        setTimeout(() => {
+          onAnalysisComplete(null);
+        }, 2000);
+      }
+    };
+
+    analyzePhoto();
+  }, [uploadedFile, onAnalysisComplete]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="flex flex-col items-center space-y-6">
