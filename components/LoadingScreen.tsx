@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { FirebaseService } from '../src/services/firebaseService';
 import { GeminiService } from '../src/services/geminiService';
 
 interface LoadingScreenProps {
@@ -15,16 +16,25 @@ export function LoadingScreen({ onAnalysisComplete, uploadedFile }: LoadingScree
       }
 
       try {
-        console.log('Starting analysis with Gemini API...');
-        const result = await GeminiService.analyzeDailyInsight(uploadedFile);
-        console.log('Analysis result:', result);
+        console.log('Starting analysis with Firebase Functions...');
+        
+        // Try Firebase Functions first
+        let result;
+        try {
+          result = await FirebaseService.analyzeDailyInsight(uploadedFile);
+          console.log('Firebase Functions result:', result);
+        } catch (firebaseError) {
+          console.log('Firebase Functions failed, falling back to Gemini API...');
+          result = await GeminiService.analyzeDailyInsight(uploadedFile);
+          console.log('Gemini API result:', result);
+        }
         
         // Simulate minimum loading time for better UX
         setTimeout(() => {
           onAnalysisComplete(result);
         }, 2000);
       } catch (error) {
-        console.error('Analysis failed:', error);
+        console.error('All analysis methods failed:', error);
         // Use mock data as fallback
         setTimeout(() => {
           onAnalysisComplete(null);
