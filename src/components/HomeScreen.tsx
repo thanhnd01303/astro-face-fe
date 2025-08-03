@@ -1,6 +1,6 @@
 import React from 'react';
 import { Eye, Map, History, Heart } from 'lucide-react';
-import { AppState } from '../App';
+import { AppState } from '../src/App';
 
 interface HomeScreenProps {
   onNavigate: (screen: AppState, type?: string) => void;
