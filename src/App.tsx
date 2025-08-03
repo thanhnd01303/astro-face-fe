@@ -12,3 +12,5 @@
  
  type AppState
    | "home"
+
+export default React
